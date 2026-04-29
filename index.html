@@ -380,26 +380,31 @@ function proximaFase() {
     function refreshSurfeBanner() {
         const container = document.getElementById('surfe-container');
         
-        // 1. Limpa o conteúdo anterior
+        // 1. Limpa o banner anterior
         container.innerHTML = '';
 
-        // 2. Cria a tag <ins> do anúncio
+        // 2. Cria o elemento do novo anúncio com o SID 420510
         const ins = document.createElement('ins');
         ins.className = 'surfe-be';
-        ins.setAttribute('data-sid', '420519');
+        ins.setAttribute('data-sid', '420510');
         container.appendChild(ins);
 
-        // 3. Cria e executa o script de inicialização (push)
-        const scriptPush = document.createElement('script');
-        scriptPush.innerHTML = '(adsurfebe = window.adsurfebe || []).push({});';
-        container.appendChild(scriptPush);
+        // 3. Dispara o comando de inicialização do anúncio
+        try {
+            const scriptPush = document.createElement('script');
+            scriptPush.innerHTML = '(adsurfebe = window.adsurfebe || []).push({});';
+            container.appendChild(scriptPush);
+        } catch (e) {
+            console.error("Erro ao carregar o anúncio:", e);
+        }
     }
 
-    // Primeira execução
+    // Inicializa o primeiro banner
     refreshSurfeBanner();
 
-    // Atualiza a cada 30 segundos
+    // Loop de atualização a cada 30 segundos
     setInterval(refreshSurfeBanner, 30000);
+</script>
 </script>
 </script>
 <script src="https://www.highperformanceformat.com/2a5e7302edec5e07fb8153e06aa96446/invoke.js"></script>
