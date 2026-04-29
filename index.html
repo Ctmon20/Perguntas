@@ -368,15 +368,39 @@ function proximaFase() {
     transform: translateX(-50%);
     z-index: 9999;
     background: transparent;
+    min-width: 320px;
+    min-height: 50px;
 ">
+    <div id="surfe-container"></div>
+</div>
+
+<script src="//static.surfe.pro/js/net.js"></script>
+
 <script>
-  atOptions = {
-    'key' : '2a5e7302edec5e07fb8153e06aa96446',
-    'format' : 'iframe',
-    'height' : 50,
-    'width' : 320,
-    'params' : {}
-  };
+    function refreshSurfeBanner() {
+        const container = document.getElementById('surfe-container');
+        
+        // 1. Limpa o conteúdo anterior
+        container.innerHTML = '';
+
+        // 2. Cria a tag <ins> do anúncio
+        const ins = document.createElement('ins');
+        ins.className = 'surfe-be';
+        ins.setAttribute('data-sid', '420519');
+        container.appendChild(ins);
+
+        // 3. Cria e executa o script de inicialização (push)
+        const scriptPush = document.createElement('script');
+        scriptPush.innerHTML = '(adsurfebe = window.adsurfebe || []).push({});';
+        container.appendChild(scriptPush);
+    }
+
+    // Primeira execução
+    refreshSurfeBanner();
+
+    // Atualiza a cada 30 segundos
+    setInterval(refreshSurfeBanner, 30000);
+</script>
 </script>
 <script src="https://www.highperformanceformat.com/2a5e7302edec5e07fb8153e06aa96446/invoke.js"></script>
 </div>
