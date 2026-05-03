@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="application-name" content="QUIZ">
+    <meta name="apple-mobile-web-app-title" content="QUIZ">
+
+    <link rel="icon" href="logo.png">
+    <link rel="apple-touch-icon" href="logo.png">
+    <link rel="manifest" href="manifest.json">
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Quiz por Fases</title>
@@ -12,142 +22,176 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: Arial;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; /* Fonte mais moderna */
     position: relative;
+    background-color: #0f172a; /* Cor de fundo caso a imagem falhe */
     background-size: cover !important;
     background-position: center !important;
     background-repeat: no-repeat !important;
+    overflow-x: hidden;
 }
 
-/* overlay estilo game */
+/* Overlay futurista com tom azulado/escuro */
 body::before {
     content: "";
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle at top, rgba(0,0,0,0.4), rgba(0,0,0,0.9));
+    background: radial-gradient(circle at center, rgba(15, 23, 42, 0.6), rgba(2, 6, 23, 0.95));
     z-index: -1;
 }
 
 .container {
     width: 100%;
     max-width: 480px;
-    padding: 10px;
+    padding: 20px;
     color: white;
+    z-index: 1;
 }
 
+/* Título com brilho */
 h1 {
     text-align: center;
-    font-size: 22px;
-    margin-bottom: 10px;
-    text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+    font-size: 26px;
+    margin-bottom: 15px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background: linear-gradient(to bottom, #fff, #facc15);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 2px 8px rgba(250, 204, 21, 0.4));
 }
 
 .counter {
     text-align: center;
-    margin-bottom: 10px;
-    font-size: 14px;
-    opacity: 0.9;
+    margin-bottom: 15px;
+    font-size: 13px;
+    font-weight: bold;
+    color: #94a3b8;
+    text-transform: uppercase;
 }
 
+/* Card Estilo Glassmorphism Refinado */
 .card {
-    background: rgba(255,255,255,0.08);
-    backdrop-filter: blur(12px);
-    padding: 18px;
-    border-radius: 18px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    background: rgba(30, 41, 59, 0.7);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    padding: 25px;
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
 }
 
 .fase-info {
     text-align: center;
-    margin-bottom: 12px;
-    font-weight: bold;
+    margin-bottom: 15px;
+    font-weight: 800;
     color: #facc15;
-    background: rgba(0,0,0,0.4);
-    padding: 6px 10px;
-    border-radius: 12px;
+    background: rgba(250, 204, 21, 0.1);
+    border: 1px solid rgba(250, 204, 21, 0.3);
+    padding: 8px 16px;
+    border-radius: 50px;
     display: inline-block;
+    font-size: 12px;
 }
 
 .timer {
     color: #facc15;
     font-weight: bold;
-    margin-bottom: 12px;
+    margin-bottom: 15px;
     text-align: center;
+    font-family: monospace;
+    font-size: 18px;
 }
 
 h2 {
-    font-size: 18px;
+    font-size: 20px;
     text-align: center;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
+    line-height: 1.4;
+    font-weight: 600;
 }
 
 button {
     width: 100%;
-    padding: 14px;
-    margin: 8px 0;
+    padding: 16px;
+    margin: 10px 0;
     border: none;
-    border-radius: 14px;
+    border-radius: 16px;
     font-size: 15px;
+    font-weight: bold;
     cursor: pointer;
-    transition: 0.2s;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* Botão Voltar Discreto */
 .btn-voltar {
-    background: rgba(255, 255, 255, 0.1);
-    color: #fff;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    padding: 5px 10px;
-    border-radius: 8px;
-    font-size: 12px;
-    cursor: pointer;
+    background: rgba(255, 255, 255, 0.05);
+    color: #94a3b8;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 6px 14px;
+    border-radius: 10px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
     margin-bottom: 10px;
-    width: auto; /* Para não ocupar a largura toda */
-    display: inline-block;
+    width: auto;
 }
 
 .btn-voltar:hover {
-    background: rgba(239, 68, 68, 0.3); /* Fica levemente avermelhado no hover */
+    background: rgba(239, 68, 68, 0.2);
+    color: #ef4444;
+    border-color: rgba(239, 68, 68, 0.4);
 }
 
+/* Opções do Quiz */
 .option {
-    background: rgba(255,255,255,0.12);
-    color: white;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    background: rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: left;
+    padding-left: 20px;
 }
 
 .option:hover {
-    transform: scale(1.02);
-    background: rgba(255,255,255,0.18);
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateX(5px);
 }
 
 .correct {
-    background: linear-gradient(135deg, #22c55e, #16a34a);
+    background: linear-gradient(135deg, #059669, #10b981) !important;
+    color: white;
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
 }
 
 .wrong {
-    background: linear-gradient(135deg, #ef4444, #b91c1c);
+    background: linear-gradient(135deg, #dc2626, #ef4444) !important;
+    color: white;
+    box-shadow: 0 0 20px rgba(239, 68, 68, 0.4);
 }
 
 .action {
-    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-    font-weight: bold;
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
 }
 
-/* Estilo para os botões do menu principal */
-.btn-categoria {
-    background: linear-gradient(135deg, #facc15, #ca8a04);
-    color: #000;
-    font-weight: bold;
-    margin-top: 15px;
+.action:active {
+    transform: scale(0.96);
 }
 
 body {
-    padding-bottom: 60px;
+    padding-bottom: 80px;
 }
 
+/* Responsividade */
 @media (max-width: 500px) {
-    .card { padding: 15px; }
-    h2 { font-size: 16px; }
+    .container { padding: 15px; }
+    .card { padding: 20px; border-radius: 20px; }
+    h2 { font-size: 18px; }
+    h1 { font-size: 22px; }
 }
 </style>
 
@@ -335,10 +379,45 @@ function mostrar() {
 function fim() {
     let html = "";
     if (erros === 0) {
-        html = `
-            <h2>🏆 Fase concluída!</h2>
-            <button class="action" onclick="proximaFase()">Próxima Fase</button>
-        `;
+    html = `
+        <style>
+            @keyframes pulseGold {
+                0% { transform: scale(1); opacity: 1; }
+                50% { transform: scale(1.05); opacity: 0.8; }
+                100% { transform: scale(1); opacity: 1; }
+            }
+            .fase-sucesso {
+                text-align: center;
+                padding: 20px;
+                border: 1px solid #facc15;
+                background: rgba(250, 204, 21, 0.05);
+                border-radius: 15px;
+                animation: fadeIn 0.5s ease-out;
+            }
+            .trofeu-animado {
+                font-size: 50px;
+                display: block;
+                margin-bottom: 10px;
+                animation: pulseGold 2s infinite;
+            }
+            .texto-brilhante {
+                color: #facc15;
+                text-transform: uppercase;
+                letter-spacing: 2px;
+                font-weight: bold;
+                text-shadow: 0 0 10px rgba(250, 204, 21, 0.5);
+                margin-bottom: 20px;
+            }
+        </style>
+        <div class="fase-sucesso">
+            <span class="trofeu-animado">🏆</span>
+            <h2 class="texto-brilhante">Fase Concluída!</h2>
+            <p style="color: #ddd; font-size: 14px; margin-bottom: 20px;">Seu desempenho foi impecável nesta etapa.</p>
+            <button class="action" onclick="proximaFase()" style="background: linear-gradient(135deg, #facc15, #ca8a04); color: #000; font-weight: bold; border: none; box-shadow: 0 4px 15px rgba(202, 138, 4, 0.4);">
+                INICIAR PRÓXIMA FASE ➔
+            </button>
+        </div>
+    `;
     } else {
         html = `
             <h2>❌ Você errou ${erros}</h2>
@@ -432,6 +511,7 @@ function proximaFase() {
                     background: linear-gradient(to bottom, #fff 0%, #facc15 50%, #ca8a04 100%);
                     -webkit-background-clip: text;
                     -webkit-text-fill-color: transparent;
+                    color: transparent;
                     margin-bottom: 30px;
                     animation: textGlow 1.5s infinite alternate;
                     letter-spacing: 2px;
