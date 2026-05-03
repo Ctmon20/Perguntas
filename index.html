@@ -385,10 +385,32 @@ function tentarNovamente() {
 
 function proximaFase() {
     faseAtual++;
+
     if (faseAtual >= fases.length) {
-        document.getElementById("quiz").innerHTML = "<h2>🎉 Você zerou o jogo!</h2>";
+        // Banner bonito com mensagem bíblica
+        document.getElementById("quiz").innerHTML = `
+            <div style="text-align: center; padding: 20px; animation: fadeIn 1s ease-in-out;">
+                <h2 style="font-size: 28px; background: linear-gradient(to bottom, #facc15, #ca8a04); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 20px;">
+                    🎉 VITÓRIA TOTAL!
+                </h2>
+                
+                <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(250, 204, 21, 0.3); padding: 20px; border-radius: 15px; margin-bottom: 20px;">
+                    <p style="font-style: italic; font-size: 18px; line-height: 1.6; color: #fefefe;">
+                        "Combati o bom combate, acabei a carreira, guardei a fé."
+                    </p>
+                    <span style="display: block; margin-top: 10px; font-weight: bold; color: #facc15;">
+                        — 2 Timóteo 4:7
+                    </span>
+                </div>
+
+                <button class="action" onclick="location.reload()" style="background: linear-gradient(135deg, #facc15, #ca8a04); color: #000;">
+                    Recomeçar Jornada
+                </button>
+            </div>
+        `;
         return;
     }
+
     carregarFase();
 }
 
