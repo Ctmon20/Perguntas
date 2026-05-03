@@ -115,6 +115,31 @@ h1 {
     gap: 20px;
 }
 
+.result-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    padding: 15px;
+    margin: 15px 0;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.stat-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 8px 0;
+}
+
+.stat-label { color: #94a3b8; font-size: 14px; }
+.stat-value { font-weight: bold; font-size: 18px; }
+
+.btn-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 20px;
+}
+
 .coin-display {
     color: #facc15;
     text-shadow: 0 0 10px rgba(250, 204, 21, 0.5);
@@ -417,27 +442,67 @@ function mostrar() {
 
 function fim() {
     let html = "";
+    const totalGanhos = pontos * 10;
+
     if (erros === 0) {
         html = `
-        <div class="fase-sucesso" style="text-align:center;">
-            <span style="font-size:50px;">🏆</span>
-            <h2 style="color:#facc15;">Fase Concluída!</h2>
-            <p>Moedas Acumuladas: <b>${pontos * 10}</b></p>
-            <button class="action" onclick="proximaFase()">INICIAR PRÓXIMA FASE ➔</button>
+        <div style="text-align:center; animation: fadeIn 0.5s ease;">
+            <div style="font-size:60px; margin-bottom: 10px; filter: drop-shadow(0 0 15px #facc15);">🏆</div>
+            <h2 style="color:#facc15; margin-bottom: 5px;">Fase Impecável!</h2>
+            <p style="color: #94a3b8; font-size: 14px;">Você não cometeu nenhum erro.</p>
+
+            <div class="result-card">
+                <div class="stat-row">
+                    <span class="stat-label">💰 Moedas da Fase</span>
+                    <span class="stat-value" style="color: #facc15;">+${totalGanhos}</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">⭐ Bônus de Precisão</span>
+                    <span class="stat-value" style="color: #10b981;">100%</span>
+                </div>
+            </div>
+
+            <button class="action" style="background: linear-gradient(135deg, #10b981, #059669);" onclick="proximaFase()">
+                PRÓXIMA FASE ➔
+            </button>
         </div>`;
     } else {
         html = `
-            <h2>❌ Você errou ${erros}</h2>
-            <!-- Botão Adicionado para testar o Ranking ao perder -->
-            <button class="action" style="background: #6366f1;" onclick="telaSalvarRanking()">Salvar Pontuação no Ranking</button>
-            
-            <button class="action" onclick="tentarNovamente()">Tentar Novamente</button>
-            <div style="margin-top: 15px;">
-                <button class="action" style="background: #00bcd4;" onclick="chamarMonetag()">📺 Ver Erros (Anúncio)</button>
+        <div style="text-align:center; animation: fadeIn 0.5s ease;">
+            <div style="font-size:50px; margin-bottom: 10px;">📉</div>
+            <h2 style="color:#ef4444; margin-bottom: 5px;">Quase lá!</h2>
+            <p style="color: #94a3b8; font-size: 14px;">Você teve ${erros} erro(s) nesta fase.</p>
+
+            <div class="result-card">
+                <div class="stat-row">
+                    <span class="stat-label">💰 Moedas Acumuladas</span>
+                    <span class="stat-value">${totalCoins}</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">📍 Fase Atual</span>
+                    <span class="stat-value">${faseAtual + 1}</span>
+                </div>
             </div>
-            <div id="box-erros" style="display:none; margin-top: 15px; text-align: left; background: rgba(0,0,0,0.2); padding: 10px; border-radius: 10px;">
-                <ul id="lista-final-erros"></ul>
-            </div>`;
+
+            <div class="btn-group">
+                <button class="action" style="margin:0; background: #6366f1;" onclick="telaSalvarRanking()">
+                    🏆 SALVAR NO RANKING
+                </button>
+                
+                <button class="action" style="margin:0; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);" onclick="tentarNovamente()">
+                    🔄 TENTAR NOVAMENTE
+                </button>
+
+                <button class="action" style="margin:0; background: #00bcd4; font-size: 13px;" onclick="chamarMonetag()">
+                    📺 VER ONDE ERREI (ANÚNCIO)
+                </button>
+            </div>
+
+            <div id="box-erros" style="display:none; margin-top: 15px; text-align: left; background: rgba(0,0,0,0.3); padding: 15px; border-radius: 16px; border: 1px dashed rgba(255,255,255,0.2);">
+                <p style="color: #ef4444; font-weight: bold; margin-top: 0;">Revise seus erros:</p>
+                <ul id="lista-final-erros" style="font-size: 13px; color: #cbd5e1; padding-left: 20px;"></ul>
+            </div>
+        </div>`;
     }
     document.getElementById("quiz").innerHTML = html;
 }
