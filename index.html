@@ -48,7 +48,7 @@ body::before {
     z-index: 1;
 }
 
-/* Título com brilho */
+/* Título com brilho e correção de transparência */
 h1 {
     text-align: center;
     font-size: 26px;
@@ -56,9 +56,39 @@ h1 {
     letter-spacing: 2px;
     text-transform: uppercase;
     background: linear-gradient(to bottom, #fff, #facc15);
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    color: transparent; /* Garante que o texto fique vazado para o gradiente */
     filter: drop-shadow(0 2px 8px rgba(250, 204, 21, 0.4));
+}
+
+/* Estilo da Logo */
+/* Estilo da Logo em formato de Círculo */
+.logo-quiz {
+    width: 120px;
+    height: 120px;
+    object-fit: cover; /* Garante que a imagem preencha o círculo sem deformar */
+    display: block;
+    margin: 0 auto 15px auto;
+    
+    /* Transforma em Círculo */
+    border-radius: 50%; 
+    
+    /* Adiciona uma borda dourada para dar acabamento */
+    border: 3px solid #facc15;
+    
+    /* Brilho externo para combinar com o tema */
+    box-shadow: 0 0 20px rgba(250, 204, 21, 0.5);
+    
+    /* Opcional: leve animação de pulso */
+    animation: logoPulse 2s infinite ease-in-out;
+}
+
+@keyframes logoPulse {
+    0% { transform: scale(1); box-shadow: 0 0 15px rgba(250, 204, 21, 0.4); }
+    50% { transform: scale(1.02); box-shadow: 0 0 25px rgba(250, 204, 21, 0.7); }
+    100% { transform: scale(1); box-shadow: 0 0 15px rgba(250, 204, 21, 0.4); }
 }
 
 .counter {
@@ -208,8 +238,9 @@ body {
 </div>
 
 <div id="quiz" class="card">
-    <!-- Menu Inicial -->
+    <!-- Menu Inicial com Logo Adicionada -->
     <div id="menu-inicial">
+        <img src="logo.png" alt="Logo" class="logo-quiz">
         <h2 style="margin-bottom: 20px;">Escolha uma Categoria</h2>
         <button class="btn-categoria" onclick="escolherCategoria('religiao')">📖 Religião</button>
         <button class="btn-categoria" onclick="escolherCategoria('curiosidades')">💡 Curiosidades</button>
@@ -457,7 +488,6 @@ function proximaFase() {
     faseAtual++;
     
     if (faseAtual >= fases.length) {
-        // Para garantir o visual futurista, vamos injetar um CSS específico para esta tela
         const estiloFinal = `
             <style>
                 @keyframes glowPulse {
@@ -482,7 +512,6 @@ function proximaFase() {
                     overflow: hidden;
                 }
 
-                /* Detalhe futurista nos cantos */
                 .final-card::before, .final-card::after {
                     content: '';
                     position: absolute;
@@ -509,6 +538,7 @@ function proximaFase() {
                     font-size: 32px;
                     font-weight: bold;
                     background: linear-gradient(to bottom, #fff 0%, #facc15 50%, #ca8a04 100%);
+                    background-clip: text;
                     -webkit-background-clip: text;
                     -webkit-text-fill-color: transparent;
                     color: transparent;
@@ -584,7 +614,7 @@ function proximaFase() {
         container.appendChild(scriptPush);
     }
     refreshSurfeBanner();
-    setInterval(refreshSurfeBanner, 30000);
+    setInterval(refreshSurfeBanner, 60000);
 </script>
 </body>
 </html>
