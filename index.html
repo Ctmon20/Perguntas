@@ -297,6 +297,7 @@ body { padding-bottom: 80px; }
             <h2 style="margin-bottom: 20px;">Teste seu conhecimento e avance de fase</h2>
             <button class="btn-categoria" onclick="escolherCategoria('religiao')">📖 Religião</button>
             <button class="btn-categoria" onclick="escolherCategoria('curiosidades')">💡 Curiosidades</button>
+            <button class="btn-categoria" onclick="escolherCategoria('Futebol')">⚽ Futebol</button>
             <button class="action" style="background: #6366f1; margin-top: 15px;" onclick="verRanking()">🏆 Ranking Global</button>
         </div>
     </div>
@@ -307,7 +308,8 @@ const URL_RANKING = "https://script.google.com/macros/s/AKfycbwh_l4xRcnvC6rTlwzH
 
 const linksCategorias = {
     religiao: "https://docs.google.com/spreadsheets/d/e/2PACX-1vTbLKo7OrAuSAlaKkHIEfg2q1Vl2i-b5Jlcpm6j3-SFm68wdcAwBMWyY5uWmtbo3yIy378ApaCrgzXn/pub?gid=2042818854&single=true&output=csv",
-    curiosidades: "https://docs.google.com/spreadsheets/d/e/2PACX-1vRNuwwnAKhYDnsELndwC4tmIIGnRTwWThML03j-Viw2kwWtkylWT035Hj2amdB7j2Hcj0KfkS93Qi27/pub?gid=186362181&single=true&output=csv"
+    curiosidades: "https://docs.google.com/spreadsheets/d/e/2PACX-1vRNuwwnAKhYDnsELndwC4tmIIGnRTwWThML03j-Viw2kwWtkylWT035Hj2amdB7j2Hcj0KfkS93Qi27/pub?gid=186362181&single=true&output=csv",
+    Futebol: "https://docs.google.com/spreadsheets/d/e/2PACX-1vSzToXmaCiC0tqGFS3Ejc_kHeW1JI9TRvm94HGAFau_AFwJSxdpGUsu2UXe4LMTtoFLP0E-cSw9G1RL/pub?gid=905938198&single=true&output=csv"
 };
 
 let urlFases = "";
